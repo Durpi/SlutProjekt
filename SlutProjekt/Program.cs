@@ -42,22 +42,19 @@ namespace SlutProjekt
                     Console.WriteLine("You are now inside the dungeon");
                     Console.WriteLine("You meet a monster and fight it");
 
-                    int monsterHp = generator.Next(30, 40);
+                    int monsterHp = generator.Next(20, 50);
                     int monsterAttack = generator.Next(6, 8);
+                    Thread.Sleep(3000);
 
+                    Console.WriteLine(username + " has " + userHp + " hp right now" +
+                        "\nThe moster has " + monsterHp + " hp right now");
 
-                    Console.WriteLine(username + " has " + userHp + " right now" +
-                        "\nThe moster has " + monsterHp + " right now");
-
-                    while (monsterHp == 0 || userHp == 0)
+                    while (monsterHp != 0 && userHp != 0)
                     {
                         Thread.Sleep(4000);
 
                         monsterHp = monsterHp - userAttack;
                         userHp = userHp - monsterAttack;
-                        Console.WriteLine("User hp dropped down to " + userHp +
-                            "\nThe monsters hp dropped down to " + monsterHp);
-                        Thread.Sleep(3000);
                         if (monsterHp < 0)
                         {
                             monsterHp = 0;
@@ -66,10 +63,15 @@ namespace SlutProjekt
                         {
                             userHp = 0;
                         }
+
+                        Console.WriteLine(username + "'s hp dropped down to " + userHp +
+                            "\nThe monsters hp dropped down to " + monsterHp);
+                        Thread.Sleep(3000);
+                        
                     }
                     if (userHp <= 0 && monsterHp <= 0)
                     {
-                        Console.WriteLine("you survive but use all your strength to heal youtself");
+                        Console.WriteLine("You survive but use all your strength to heal youtself");
                         userHp = originalUserHp;
                     }
                     else if (userHp <= 0)
@@ -78,6 +80,7 @@ namespace SlutProjekt
                     }
                     else if (monsterHp <= 0)
                     {
+                        Console.WriteLine("You won and get even stronger");
                         userHp = originalUserHp;
                         userAttack++;
                     }
